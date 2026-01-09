@@ -1,0 +1,660 @@
+/* =========================
+   RESET + VARIÁVEIS
+========================= */
+:root {
+  --primary: #4f7df3;
+  --secondary: #7aa2ff;
+  --dark: #0b1020;
+  --light: #f6f8fc;
+  --text: #333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--light);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+/* =========================
+   NAV
+========================= */
+nav a {
+  margin-left: 24px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: 0.35s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+.btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 14px;
+  font-weight: 600;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* brilho interno */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit; /* 🔥 ISSO CORRIGE O QUADRADO */
+  background: radial-gradient(
+    circle at top left,
+    rgba(255,255,255,0.35),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+.btn:hover {
+  transform: translateY(-6px); /* 🔥 MOVIMENTO VISÍVEL */
+  box-shadow:
+    0 14px 30px rgba(79,125,243,0.45);
+}
+
+
+
+.big {
+  padding: 18px 42px;
+  font-size: 16px;
+}
+
+/* =========================
+   HERO (FULLSCREEN AVANÇADO)
+========================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+  background: linear-gradient(
+    120deg,
+    var(--primary),
+    #5f7cff,
+    var(--dark)
+  );
+  background-size: 300% 300%;
+  animation: gradientMove 14s ease infinite;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow atmosférico */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(122,162,255,0.35), transparent 70%);
+  top: -200px;
+  left: -200px;
+  filter: blur(80px);
+}
+
+/* Noise texture */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='1' cy='1' r='1' fill='white' opacity='0.06'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-text h1 {
+  font-size: clamp(30px, 4.5vw, 52px);
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+
+.hero-text p {
+  font-size: 18px;
+  color: #dbe3ff;
+  max-width: 540px;
+  margin-bottom: 45px;
+}
+
+/* =========================
+   SERVIÇOS
+========================= */
+.servicos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 45px;
+  padding: 120px 60px;
+  background: linear-gradient(180deg, #ffffff, #eef1ff);
+}
+
+.card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(16px);
+  border-radius: 28px;
+  padding: 38px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.1);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+  transform-style: preserve-3d;
+}
+
+.card h3 {
+  font-size: 22px;
+  margin-bottom: 14px;
+  color: #111;
+}
+
+.card p {
+  font-size: 15px;
+  color: #555;
+}
+
+.card:hover {
+  transform: perspective(1200px)
+    rotateX(7deg)
+    rotateY(-7deg)
+    translateY(-18px);
+  box-shadow: 0 45px 90px rgba(0,0,0,0.18);
+}
+
+/* =========================
+   SOBRE + CONTATO
+========================= */
+.sobre,
+.contato {
+  padding: 120px 60px;
+  text-align: center;
+}
+
+.sobre h2,
+.contato h2 {
+  font-size: clamp(30px, 4vw, 42px);
+  margin-bottom: 28px;
+  color: #111;
+}
+
+.sobre p {
+  max-width: 680px;
+  margin: auto;
+  font-size: 17px;
+  color: #555;
+}
+
+/* =========================
+   WHATSAPP CTA
+========================= */
+.whatsapp-btn {
+  display: inline-block;
+  margin-top: 45px;
+  background: linear-gradient(135deg, #25d366, #1ebe5d);
+  color: #fff;
+  padding: 20px 46px;
+  border-radius: 60px;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 28px 60px rgba(37,211,102,0.5);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  padding: 45px;
+  text-align: center;
+  background: var(--dark);
+  color: #cbd5f5;
+  font-size: 14px;
+}
+
+/* =========================
+   ANIMAÇÕES
+========================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* TEXTO ANIMADO */
+.split-text span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(25px);
+  animation: textUp 0.8s forwards ease-out;
+}
+
+
+@keyframes textUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width: 768px) {
+  .header {
+    padding: 20px 30px;
+  }
+
+  .hero {
+    padding: 0 30px;
+    text-align: center;
+  }
+
+  .hero-text p {
+    margin: auto;
+  }
+
+  .servicos,
+  .sobre,
+  .contato {
+    padding: 90px 30px;
+  }
+}
+
+/* =========================
+   SCROLL PROGRESS BAR
+========================= */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  z-index: 2000;
+}
+
+
+/* =========================
+   POR QUE ME ESCOLHER
+========================= */
+.porque {
+  padding: 120px 60px;
+  background: linear-gradient(180deg, #eef1ff, #ffffff);
+  text-align: center;
+}
+
+.porque-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.porque-card {
+  background: white;
+  padding: 40px;
+  border-radius: 26px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.porque-card span {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 18px;
+}
+
+.porque-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.porque-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.15);
+}
+
+/* =========================
+   NÚMEROS
+========================= */
+.numeros {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  padding: 120px 60px;
+  background: var(--dark);
+  color: white;
+  text-align: center;
+}
+
+.numero h3 {
+  font-size: 52px;
+  color: var(--secondary);
+}
+
+.numero p {
+  margin-top: 10px;
+  color: #cbd5f5;
+}
+
+@media (max-width: 768px) {
+  .numeros {
+    flex-direction: column;
+    gap: 50px;
+  }
+}
+.hero .blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(122,162,255,0.45), transparent 70%);
+  filter: blur(120px);
+  animation: blobMove 18s infinite alternate ease-in-out;
+}
+
+.hero .blob.one {
+  top: -200px;
+  right: -150px;
+}
+
+.hero .blob.two {
+  bottom: -200px;
+  left: -150px;
+  animation-delay: 6s;
+}
+
+@keyframes blobMove {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(-120px) translateX(100px); }
+}
+.para-quem {
+  padding: 120px 60px;
+  background: #fff;
+  text-align: center;
+}
+
+.para-quem-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.pq-card {
+  background: linear-gradient(135deg, #f4f7ff, #ffffff);
+  padding: 40px 30px;
+  border-radius: 26px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  font-size: 16px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.pq-card span {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.pq-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 40px 80px rgba(79,125,243,0.25);
+}
+.processo {
+  padding: 120px 60px;
+  background: linear-gradient(180deg, #eef1ff, #ffffff);
+  text-align: center;
+}
+
+.processo-grid {
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+}
+
+.processo-step {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(14px);
+  padding: 45px 30px;
+  border-radius: 30px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+  transition: transform 0.4s ease;
+}
+
+.processo-step span {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.processo-step:hover {
+  transform: translateY(-10px) scale(1.03);
+}
+.depoimentos {
+  padding: 120px 60px;
+  background: #fff;
+  text-align: center;
+}
+
+.depo-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 35px;
+}
+
+.depo-card {
+  background: linear-gradient(135deg, #ffffff, #f2f5ff);
+  padding: 40px;
+  border-radius: 28px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  font-style: italic;
+}
+
+.depo-card span {
+  display: block;
+  margin-top: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.faq {
+  padding: 120px 60px;
+  background: #fff;
+  text-align: center;
+}
+
+.faq-item {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 30px 35px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+.faq-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.faq-item p {
+  color: #555;
+  font-size: 15px;
+}
+.planos {
+  padding: 120px 60px;
+  background: linear-gradient(180deg, #f5f7ff, #ffffff);
+  text-align: center;
+}
+
+.planos-grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.plano {
+  padding: 45px;
+  border-radius: 30px;
+  background: white;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+}
+
+.plano ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.plano li {
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.plano.destaque {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+}
+.cta-final {
+  padding: 140px 60px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary), var(--dark));
+  color: white;
+}
+
+.cta-final {
+  padding: 120px 20px;
+  text-align: center;
+  background: radial-gradient(
+    circle at top,
+    #5b7cfa,
+    #1a2a5c 70%
+  );
+  color: #fff;
+}
+
+.cta-final h2 {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.cta-final p {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  font-size: 1.05rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* BOTÃO */
+.btn-cta {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  padding: 18px 36px;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #6d8bff, #4f6ef7);
+  color: #fff;
+  text-decoration: none;
+
+  box-shadow: 0 20px 40px rgba(0,0,0,.35);
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.btn-cta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px rgba(0,0,0,.45);
+}
+
+.btn-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.btn-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.8;
+} 
